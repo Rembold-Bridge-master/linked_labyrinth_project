@@ -2,7 +2,10 @@
 This file serves to test the is_path_to_freedom function written by students.
 
 If using PyTest, it should be automatically picked up and each of the methods
-run. The generated demo maze is the gridded maze shown in the guide.
+run. I am also provided code at the bottom so that this can be run manually if 
+PyTest is not installed.
+
+The generated demo maze is the gridded maze shown in the guide.
 """
 
 from MazeUtils import generate_demo_maze
@@ -42,4 +45,22 @@ class TestPathToFreedom:
         assert not is_path_to_freedom(self.maze, "SWWNSEENWNNEW")
         assert not is_path_to_freedom(self.maze, "ESNWSWWN")
         assert not is_path_to_freedom(self.maze, "WNWNSENEWSSEES")
+
+    def test_duplicate_items(self):
+        assert not is_path_to_freedom(self.maze, "ESNSNS")
+        assert not is_path_to_freedom(self.maze, "SWWNSEENWNNEWE")
+        assert is_path_to_freedom(self.maze, "ESNWWNNEWSSESWWNSN")
+        assert is_path_to_freedom(self.maze, "SWWNSEENWNNEWSSEESNS")
+        assert is_path_to_freedom(self.maze, "WNNEWSSESWWNSEENESNWWNNE")
+
+
+if __name__ == '__main__':
+    testrun = TestPathToFreedom()
+    testrun.test_valid_paths()
+    testrun.test_valid_then_wall()
+    testrun.test_invalid_wall_hits()
+    testrun.test_invalid_no_items()
+    testrun.test_invalid_single_item()
+    testrun.test_invalid_double_item()
+    testrun.test_duplicate_items()
 
